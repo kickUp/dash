@@ -1,0 +1,169 @@
+<link rel="import" href="/static/elements/polymer/polymer.html" />
+<link rel="import" href="/static/elements/course-actions.html" />
+<link rel="import" href="/static/elements/iron-selector/iron-selector.html" />
+<link rel="import" href="/static/elements/iron-ajax/iron-ajax.html" />
+<link rel="import" href="/static/elements/paper-material/paper-material.html" />
+<link rel="import" href="/static/elements/paper-toolbar/paper-toolbar.html" />
+<link rel="import" href="/static/elements/paper-scroll-header-panel/paper-scroll-header-panel.html" />
+<dom-module id="courses-list">
+    <style is="custom-style">
+    .course-item {
+        border: 1px solid #bebebe;
+        padding: 1em;
+        margin: .4em 1em .4em;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #555;
+    }
+    
+    paper-toolbar .title {
+        margin: 0 8px;
+    }
+    
+    paper-scroll-header-panel .content {
+        padding: 8px;
+    }
+    /*        .course name {
+            display: inline-block;
+            height: 64px;
+            width: 64px;
+            border-radius: 50%;
+            background: #ddd;
+            line-height: 64px;
+            font-size: 30px;
+            color: #666;
+            text-align: center;
+        }
+        */
+    
+    .course-item .description {
+        font-size: 18px;
+        padding: .3px 0 .1em;
+        color: #888;
+    }
+    
+    .status {
+        font-size: 14px;
+        float: right;
+        padding: 1em 2em 1em;
+    }
+    
+    .status:hover {
+        /*transform-origin: center center;*/
+        
+        animation-name: rotate;
+        animation-duration: .5s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+    }
+    
+    @keyframes rotate {
+        0% {
+            transform: rotate(10deg);
+        }
+        100% {
+            transform: rotate(-10deg);
+        }
+    }
+
+    course-buttons {
+        padding-top: 1em;
+        padding-left: 2em;
+    }
+    /*:host {*/
+    /* 
+            display: inline-block;
+            background-color: green;
+            transition: all 2s;
+        } 
+       :host(:hover){
+            background-color: blue;
+            opacity: .3;
+        }*/
+    </style>
+    <template>
+        <iron-ajax id="ajax" auto url="/json/courses" handle-as="json" on-response="jsonReponse">
+        </iron-ajax>
+        <br>
+        <template is="dom-repeat" items={{courses}}>
+            <div class="content">
+                <div class="course-item">
+                    <div>
+                        <img src='{{_getImage(item.name, item.image)}}'></img>
+                        <course-actions  course={{item}}></course-actions>
+                        <paper-material class="status" elevation="1">
+                            <div>{{_courseStatus(item.starts, item.ends)}}</div>
+                        </paper-material>
+                    </div>
+                    <div class="description">{{item.description}}</div>
+                </div>
+            </div>
+        </template>
+    </template>
+    <script>
+    (function() {
+        Polymer({
+            is: "courses-list",
+            created: function() {
+
+            },
+            jsonReponse: function(request) {
+                this.courses = request.detail.response;
+                // console.log(this.$.ajax.lastResponse);
+            },
+            _getImage: function(name, image) {
+                var path = "/static/images/icons/64/";
+                if (image)
+                    return path + name.toLowerCase() + ".png";
+                return path + "unknown.png";
+            },
+            attached: function() {
+                // console.log("attached");
+                // this.$.ajax.generateRequest();
+            },
+            ready: function() {},
+            properties: {
+                courses: {
+                    type: Object
+                },
+                user: {
+                    type: Object,
+                    notify: true
+                },
+                courseStatus: {
+                    type: Object,
+                    value: function() {
+                        return {
+                            IN_PROGRESS: "In progress. Hurry up!",
+                            END: "Ended",
+                            ANNOUNCED: "Announced!"
+                        }
+                    }
+                }
+            },
+            _courseStatus: function(startTime, endTime) {
+                var time = Date.now() - endTime;
+                if (Date.now() < startTime && Date.now() < endTime)
+                    return this.courseStatus.IN_PROGRESS;
+                if (Date.now() > endTime)
+                    return this.courseStatus.END;
+                if (Date.now() > startTime)
+                    return this.courseStatus.ANNOUNCED;
+                return "Announ";
+            },
+            listeners: {}
+        });
+    })();
+    </script>
+</dom-module>
+<dom-module id="extended-material
+">
+    <template>
+    </template>
+    <script>
+    Polymer({
+        is: "extended-material",
+    });
+    </script>
+</dom-module>

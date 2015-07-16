@@ -12,7 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;  
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
- 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Date;
 
 @Entity
 @Table(name="courses")
@@ -34,9 +35,46 @@ public class Course implements Serializable {
 	@NotNull(message="Description field is required.")
 	@Size(min=1, max=100, message="Description field is required.")
 	private String description;
-	 
+
+	@Column(name="starts")
+	// @JsonFormat(pattern="yyyy-MM-dd")
+	private Date starts;
+
+	@Column(name="ends")
+	// @JsonFormat(pattern="yyyy-MM-dd")
+	private Date ends;
+
+	@Column(name="image")
+	private boolean image;
+
 	@ManyToOne	
 	private User user; // Course owner
+
+
+	public Boolean getImage() {
+		return image;
+	}
+
+	public void setImage(Boolean image) {
+		this.image=image;
+	}
+
+
+	public Date getStarts() {
+		return starts;
+	}
+
+	public void setStarts(Date starts) {
+		this.starts = starts;
+	}
+
+	public Date getEnds() {
+		return ends;
+	}
+
+	public void setEnds(Date ends) {
+		this.ends = ends;
+	}
 	
 	
 	public int getId() {

@@ -25,6 +25,9 @@ CREATE TABLE courses (
 						name varchar not null, 
 						description varchar not null, 
 						user_id int not null, 
+						starts date,
+						ends date,
+						image boolean DEFAULT 'false',
 						FOREIGN KEY(user_id) REFERENCES Users(id)
 					  );
 					   			  

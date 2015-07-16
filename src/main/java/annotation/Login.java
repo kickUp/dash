@@ -2,7 +2,7 @@ package annotation;
 
 import java.lang.annotation.*;
 
-@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Loged {
+@Target({ElementType.TYPE, ElementType.METHOD})
+public @interface Login {
 }

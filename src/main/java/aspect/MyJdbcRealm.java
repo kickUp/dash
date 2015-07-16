@@ -1,4 +1,4 @@
-package apect;
+package aspect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

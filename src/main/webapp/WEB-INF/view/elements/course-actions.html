@@ -1,0 +1,62 @@
+<link rel="import" href="/static/elements/polymer/polymer.html" />
+<link rel="import" href="/static/elements/paper-material/paper-material.html" />
+<dom-module id="course-actions">
+    <style is="custom-style">
+    paper-button[raised].colorful {
+        background: #E0945C;
+        color: #fff;
+    }
+    
+    :host {
+        position: absolute;
+        display: inline-block;
+    }
+    
+    .like-button {
+        padding: 0.5em 1em 0.5em;
+        margin-left: .8em;
+        border-radius: 10px;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    .like-button:hover {
+        text-decoration: none;
+        cursor: pointer;
+    } 
+    </style>
+    <template> 
+        <a href="{{href.update}}">
+            <div class="like-button">
+                Update
+            </div>
+        </a>
+        <a href='{{href.info}}'>
+            <div class="like-button">
+                Info
+            </div>
+        </a>
+    </template>
+    <script>
+    (function() {
+        Polymer({
+            is: "course-actions", 
+            properties: {
+                course: {
+                    type: Object,
+                    observer: '_link'
+                },
+                href: Object
+            },
+            _link: function() {
+                this.href = {
+                    "update": "/courses/" + this.course.id + "/update",
+                    "info": "/courses/" + this.course.id + "/info/"
+                };
+            }
+        });
+    })();
+    </script>
+</dom-module>

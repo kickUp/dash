@@ -25,17 +25,16 @@ public class DaoCourseImpl implements DaoCourse {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Course> getCourses() {
-		log.info("BEGIN REQUEST FOR COURSES" );
 		List<Course> courses = null;
 		try {
-		 courses = session.getCurrentSession().createQuery("FROM Course").list();//.createCriteria(Course.class).list();
+			courses = session.getCurrentSession().createQuery("FROM Course").list();	//.createCriteria(Course.class).list();		
 		} catch (Exception e) {
 			log.info("Exception aqqure " + e.getMessage());
 		}
 		if(courses != null)
 			log.info("in DAO we get courses size: " + courses.size());
 		else
-			log.debug("Courses is null");
+			log.info("Courses is null");
 		return courses;
 	}
 

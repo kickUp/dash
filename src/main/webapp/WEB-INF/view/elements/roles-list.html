@@ -1,0 +1,56 @@
+<link rel="import" href="/static/elements/polymer/polymer.html" />
+<link rel="import" href="/static/elements/iron-selector/iron-selector.html" />
+<dom-module id="roles-list">
+    <style>
+    iron-selector > * {
+        padding: 8px;
+    }
+    
+    .iron-selected {
+        background-color: #ddd;
+    }
+    </style>
+    <template>
+        <!-- local DOM for your element -->
+        <iron-selector selected="0">
+        </iron-selector>
+        <div>{{greeting}}</div>
+        <div>{{users}}</div>
+        <!-- data bindings in local DOM -->
+        <!--  url="/public/json/users" -->
+    </template>
+    <script>
+    // element registration
+    var el = Polymer({
+        is: "roles-list",
+        created: function(a) {
+            console.log("createrd!");
+            console.log(a);
+        },
+        ready: function(a) {
+            console.log("ready");
+            console.log(a);
+
+        },
+        attached: function() {
+            console.log("attached");
+        },
+        detached: function() {
+            console.log("detached");
+        },
+
+        // add properties and methods on the element's prototype
+
+        properties: {
+            // declare properties for the element's public API
+            greeting: {
+                type: String,
+                value: "user list or like"
+            },
+            users: String
+        }
+    });
+    var n = document.createElement("roles-list");
+    document.body.appendChild(n);
+    </script>
+</dom-module>

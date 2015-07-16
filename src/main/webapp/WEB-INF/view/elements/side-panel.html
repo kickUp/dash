@@ -1,0 +1,39 @@
+<link rel="import" href="/static/elements/polymer/polymer.html" />
+<dom-module id="side-panel">
+    <style>
+        @import url(http://fonts.googleapis.com/css?family=Roboto);
+        .content {
+            background-color: #D3D3D4;
+            height: 100%;
+            width: 100%;
+            padding-top: 4em;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .item {
+            padding: 1em .5em 1em;
+            margin: 0 2em 2em;
+            border-bottom: 1px solid grey;
+            border-top: 1px solid grey;
+            text-align: center;
+            color: black;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <template>
+        <div class="content">
+            <a href="#"><div class="item">dashboard</div></a>
+            <a href="#"><div class="item">create course</div></a> 
+            <a href="#"><div class="item">new courses</div></a> 
+        </div>
+    </template>
+    <script>
+    (function() {
+        Polymer({
+            is: "side-panel"
+        });
+    })();
+    </script>
+</dom-module>

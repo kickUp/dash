@@ -1,31 +1,55 @@
 package entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-//TODO: login rename to name
+ 
+
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
+	// Date of registration?
+
 	@Id
 	@Column(name = "id", unique=true, nullable = false)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
+	@Column
 	@NotNull
-	@Size(min=1, max=10, message="Password field is required.")
+	@Size(min=1, max=10, message="Password field is required!")
 	private String password;
 	 
+	@Column
 	@NotNull
-	@Size(min=1, max=10, message="Login field is required.")
+	@Size(min=1, max=10, message="Login field is required!")
 	private String login;
+
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="role_id")
+	private Role role;
 	
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	
 	public Integer getId() {
 		return id;
@@ -87,7 +111,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [password=" + password + ", login=" + login + "]";
+		return "User [password=" + password + ", login=" + login + ", role=" + role + "]";
 	}
 	
 	

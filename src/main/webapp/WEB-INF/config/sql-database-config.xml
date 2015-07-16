@@ -14,9 +14,9 @@
     <tx:annotation-driven transaction-manager="transactionManager" /> 
     
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.h2.Driver" />
-        <property name="url" value="jdbc:h2:mem:database;DB_CLOSE_DELAY=-1" />
-        <property name="username" value="sa" />
+        <property name="driverClassName" value="${dataSource.driver}" />
+        <property name="url" value="${dataSource.Url}" />
+        <property name="username" value="${dataSource.Username}" />
         <property name="password" value="" />	
     </bean>    	   
   	  
@@ -43,7 +43,8 @@
         <property name="annotatedClasses">
 	        <list>
 	        	<value>entity.Course</value> 
-	        	<value>entity.User</value>
+            <value>entity.User</value>
+	        	<value>entity.Role</value>
 	        </list>
         </property>
     </bean>            

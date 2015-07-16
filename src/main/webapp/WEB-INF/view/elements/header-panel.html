@@ -1,0 +1,85 @@
+<link rel="import" href="/static/elements/polymer/polymer.html" />
+<link rel="import" href="/static/elements/paper-toolbar/paper-toolbar.html" />
+<link rel="import" href="/static/elements/paper-toolbar/paper-toolbar.html" />
+<link rel="import" href="/static/elements/iron-icons/iron-icons.html" />
+<link rel="import" href="/static/elements/paper-icon-button/paper-icon-button.html" />
+<link rel="import" href="/static/elements/paper-toggle-button/paper-toggle-button.html" />
+<link rel="import" href="/static/elements/paper-button/paper-button.html" />
+<dom-module id="header-panel">
+    <style is="custom-style">
+    paper-toolbar {
+        background-color: var(--google-blue-500, #4285f4);
+    }
+    
+    paper-toolbar iron-icon {
+        margin: 0 8px;
+    }
+    
+    .toggle {
+        position: absolute;
+        top: 1.7em;
+        right: 7em;
+        opacity: .5;
+    }
+
+    #title {
+      font-size: 30px;
+    }
+
+    #title a {
+      text-decoration: none;
+      color: white;
+      padding-right: 2em;
+    }
+    
+
+    /* CSS rules for your element */
+    </style>
+    <template>
+        <!-- local DOM for your element -->
+        <paper-toolbar>
+            <content></content>
+             <!-- <paper-icon-button icon="arrow-back"></paper-icon-button> -->
+            <div id="title"><a href="/">Courses</a></div>
+            <div class="flex">
+              <!-- <paper-button raised>create</paper-button> -->
+            </div>
+            <paper-icon-button icon="search"></paper-icon-button>
+            <paper-button raised>
+              logout
+              <iron-icon icon="exit-to-app"></iron-icon>
+            </paper-button>
+        </paper-toolbar>
+        <!-- data bindings in local DOM -->
+    </template>
+    <script>
+    // element registration
+    Polymer({
+        is: "header-panel",
+
+        // add properties and methods on the element's prototype
+
+        properties: {
+            // declare properties for the element's public API
+            drawerPanelId: {
+                type:String,
+                value: "paperDrawerPanel"
+            }
+        },
+        _hideSideBar: function() {
+            var narrow = "force-narrow"; 
+            var targetElement = Polymer.dom(this.drawerPanelId).localTarget;
+            
+            console.log(this.drawerPanelId);
+            console.log(targetElement);
+            console.log(Polymer.dom(this.drawerPanelId));
+
+            if(targetElement.hasAttribute(narrow)) 
+                targetElement.removeAttribute(narrow);
+            else 
+                targetElement.setAttribute(narrow);
+
+        }   
+    });
+    </script>
+</dom-module>

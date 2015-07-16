@@ -6,13 +6,13 @@
        	   http://www.springframework.org/schema/mvc 
        	   http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd 
       	   http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-4.1.xsd ">
+           http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
            
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">     
 	  <property name="templateLoaderPaths">	 
 	  	<list>
 	  		<value>/WEB-INF/view/</value>
-        	<value>/WEB-INF/view/authorized/</value>   
+          <value>/WEB-INF/view/authorized/</value>   
         	<value>/WEB-INF/view/authorized/lector/</value>   
         	<value>/WEB-INF/view/authorized/student/</value>           			 
         	<value>/WEB-INF/WEB-INF/view/authorized/admin/</value>       

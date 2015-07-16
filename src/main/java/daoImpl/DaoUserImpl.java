@@ -1,6 +1,7 @@
 package daoImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import dao.DaoUser;
@@ -9,7 +10,8 @@ import freemarker.log.Logger;
 
 import org.hibernate.SessionFactory;
 
-public class DaoUserImpl implements DaoUser{
+@Repository
+public class DaoUserImpl implements DaoUser {
 	
 	Logger log = Logger.getLogger(this.getClass().getCanonicalName());
 	
@@ -25,9 +27,15 @@ public class DaoUserImpl implements DaoUser{
 		List<User> users = null;
 		try {
 			users = session.getCurrentSession().createQuery("FROM User").list();
+
 		} catch(Exception ex) {
 			log.info("Get user exception");
 		}
+		if(users == null) {
+			log.info("INFO! Users is null!"); 
+			return users;
+		}
+		log.info("Info! User list size: " + users.size()); 
 		return users;
 	}
 
